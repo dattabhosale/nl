@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximun-scale=1.0"
+    />
+    <title>Service - LeapReplica</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="brand">LeapReplica</a>
+        <nav class="site-nav" id="site-nav">
+          <a href="index.html">Home</a>
+          <a href="service.html" class="active">Service</a>
+          <a href="products.html">Products</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <button
+          class="nav-toggle"
+          id="nav-toggle"
+          aria-label="Toggle navigation"
+        >
+          ☰
+        </button>
+      </div>
+    </header>
+
+    <div class="announcement-bar" id="announcement-bar">
+      <div class="container bar-inner">
+        <span
+          >T03 & C10 have arrived in the showrooms, find us on our website of
+          your country</span
+        >
+        <button
+          class="close-bar"
+          onclick="
+            document.getElementById('announcement-bar').style.display = 'none'
+          "
+        >
+          &times;
+        </button>
+      </div>
+    </div>
+
+    <main>
+      <!-- ===== HERO with Robot + CTA ===== -->
+      <section class="service-hero-v2">
+        <div class="hero-particles" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="container hero-v2-inner">
+          <div class="hero-v2-text">
+            <span class="hero-badge">⚡ Premium Service</span>
+            <h1>LEAP <span class="text-green">SERVICE</span></h1>
+            <p class="hero-sub">Expertise by your side — wherever you are, whenever you need us.</p>
+            <div class="hero-cta-row">
+              <button class="btn btn-leappy btn-leappy-hero" id="talk-to-leappy">
+                <span class="btn-pulse"></span>
+                💬&ensp;Talk to Leappy
+              </button>
+              <span class="hero-cta-hint">Get connected instantly</span>
+            </div>
+          </div>
+          <div class="hero-v2-robot">
+            <div class="robot-glow"></div>
+            <div class="robot-speech-bubble">Need assistance? 👋</div>
+            <img src="assets/robot-mascot.png" alt="Leappy Robot Mascot" id="leappy-mascot" />
+          </div>
+        </div>
+        <div class="hero-wave">
+          <svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,80 C360,140 1080,0 1440,80 L1440,120 L0,120 Z" fill="#fff"/></svg>
+        </div>
+      </section>
+
+      <!-- ===== Service Features ===== -->
+      <section class="service-features">
+        <div class="container">
+          <h2 class="section-title">What we offer</h2>
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-icon">🔧</div>
+              <h3>Expert Repairs</h3>
+              <p>Certified technicians trained on every model with genuine parts and diagnostics.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🛡️</div>
+              <h3>Warranty Support</h3>
+              <p>Full warranty coverage and transparent service history for your peace of mind.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">📍</div>
+              <h3>Local Network</h3>
+              <p>Find your nearest authorised repairer across Europe — always close to you.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">⚡</div>
+              <h3>EV Specialisation</h3>
+              <p>Battery health checks, software updates, and charging optimisation included.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div>© 2025 LeapReplica</div>
+        <nav class="foot-nav">
+          <a href="privacy.html">Privacy</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </footer>
+
+    <!-- Hide default Salesforce chat FAB — we use the "Talk to Leappy" button instead -->
+    <style>
+      #embedded-messaging {
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+      }
+    </style>
+
+    <!-- Salesforce Embedded Messaging Script -->
+    <script type="text/javascript">
+      const ESW_CONFIG = {
+        ORG_ID: "00DMA000003XnGM",
+        DEPLOYMENT_NAME: "LPM_Leapmotor",
+        SITE_URL:
+          "https://leapmotor--dev01.sandbox.my.site.com/ESWLPMLeapmotor1760706603231",
+        SCRT2_URL: "https://leapmotor--dev01.sandbox.my.salesforce-scrt.com",
+        COUNTRY_MAPPING: {
+          it: { name: "Italy", language: "it", code: "it" },
+          es: { name: "Spain", language: "es", code: "es" },
+          fr: { name: "France", language: "fr", code: "fr" },
+          de: { name: "Germany", language: "de", code: "de" },
+          en: { name: "United States", language: "en_US", code: "en" },
+        },
+        DEFAULT_COUNTRY: "en",
+      };
+
+      // Track whether the Salesforce messaging is ready
+      let eswReady = false;
+      let pendingLaunch = false;
+
+      function getCountryCodeFromPath() {
+        return ESW_CONFIG.DEFAULT_COUNTRY;
+      }
+
+      function getCountryInfo(countryCode) {
+        return (
+          ESW_CONFIG.COUNTRY_MAPPING[countryCode] ||
+          ESW_CONFIG.COUNTRY_MAPPING[ESW_CONFIG.DEFAULT_COUNTRY]
+        );
+      }
+
+      function initEmbeddedMessaging() {
+        try {
+          const countryInfo = getCountryInfo(getCountryCodeFromPath());
+          embeddedservice_bootstrap.settings.shouldOpenLinksInSameTab = true;
+          embeddedservice_bootstrap.settings.language = countryInfo.language;
+          window.addEventListener("onEmbeddedMessagingReady", function () {
+            eswReady = true;
+            embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+              Country: countryInfo.name,
+              Language: countryInfo.language,
+              CountryCode: countryInfo.code,
+            });
+            // If user clicked "Talk to Leappy" before the chat was ready, launch now
+            if (pendingLaunch) {
+              pendingLaunch = false;
+              launchChat();
+            }
+          });
+          embeddedservice_bootstrap.init(
+            ESW_CONFIG.ORG_ID,
+            ESW_CONFIG.DEPLOYMENT_NAME,
+            ESW_CONFIG.SITE_URL,
+            { scrt2URL: ESW_CONFIG.SCRT2_URL },
+          );
+        } catch (err) {
+          console.error("[ESW] Error loading Embedded Messaging:", err);
+        }
+      }
+
+      // Launch chat by finding the Salesforce launcher button or using the API
+      function launchChat() {
+        try {
+          // Try the standard MIAW launcher button first
+          const launcher =
+            document.querySelector("#embedded-messaging button") ||
+            document.querySelector("[data-embedded-messaging-launcher]") ||
+            document.querySelector('button[class*="embeddedMessaging"]');
+          if (launcher) {
+            launcher.click();
+          } else if (
+            typeof embeddedservice_bootstrap !== "undefined" &&
+            embeddedservice_bootstrap.utilAPI
+          ) {
+            embeddedservice_bootstrap.utilAPI.launchChat();
+          } else {
+            console.warn("[ESW] Chat not ready yet — queuing launch.");
+            pendingLaunch = true;
+          }
+        } catch (e) {
+          console.error("[ESW] Failed to launch chat:", e);
+        }
+      }
+
+      // "Talk to Leappy" button click handler
+      document
+        .getElementById("talk-to-leappy")
+        .addEventListener("click", function () {
+          if (eswReady) {
+            launchChat();
+          } else {
+            // Chat not ready yet — queue the launch for when it becomes ready
+            pendingLaunch = true;
+            console.log("[ESW] Chat not ready yet. Will open when ready...");
+          }
+        });
+    </script>
+    <script
+      type="text/javascript"
+      src="https://leapmotor--dev01.sandbox.my.site.com/ESWLPMLeapmotor1760706603231/assets/js/bootstrap.min.js"
+      onload="initEmbeddedMessaging()"
+    ></script>
+  </body>
+</html>

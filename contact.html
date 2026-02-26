@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact - LeapReplica</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">LeapReplica</a>
+      <nav class="site-nav" id="site-nav">
+        <a href="index.html">Home</a>
+        <a href="service.html">Service</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="container">
+      <h1>Contact Us</h1>
+      <p>For demo purposes, this is a placeholder contact page. Add your contact form or integration here.</p>
+      <form class="contact-form">
+        <label>Name<br><input type="text" name="name"></label>
+        <label>Email<br><input type="email" name="email"></label>
+        <label>Message<br><textarea name="message"></textarea></label>
+        <p><button class="btn" type="submit">Send</button></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© 2025 LeapReplica</div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script type='text/javascript'>
+	/**
+	 * Extract country code from URL pathname
+	 * @returns {string} Country code (defaults to 'en')
+	 */
+	function getCountryCodeFromPath() {
+		const pathParts = window.location.pathname
+			.split('/')
+			.filter(function(part) { return part.length > 0; });
+		
+		return pathParts.length > 0 ? pathParts[0].toLowerCase() : 'en';
+	}
+	
+	/**
+	 * Get country information based on country code
+	 * @param {string} countryCode - Two-letter country code
+	 * @returns {Object} Country information object
+	 */
+	function getCountryInfo(countryCode) {
+		const COUNTRY_MAPPING = {
+			'it': { name: 'Italy', language: 'it', code: 'it' },
+			'es': { name: 'Spain', language: 'es', code: 'es' },
+			'fr': { name: 'France', language: 'fr', code: 'fr' },
+			'de': { name: 'Germany', language: 'de', code: 'de' },
+			'uk': { name: 'United Kingdom', language: 'en_US', code: 'uk' },
+			'us': { name: 'United States', language: 'en_US', code: 'us' },
+			'en': { name: 'United States', language: 'en_US', code: 'en' }
+		};
+		
+		return COUNTRY_MAPPING[countryCode] || COUNTRY_MAPPING['en'];
+	}
+	
+	// Register event listener BEFORE initialization
+	window.addEventListener("embeddedMessagingReady", function() {
+		try {
+			const countryCode = getCountryCodeFromPath();
+			const countryInfo = getCountryInfo(countryCode);
+			
+			embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+				Country: countryInfo.name,
+				Language: countryInfo.language,
+				CountryCode: countryInfo.code,
+			});
+			
+			console.log('Prechat fields set successfully:', countryInfo);
+		} catch (err) {
+			console.error('Error setting prechat fields: ', err);
+		}
+	});
+	
+	function initEmbeddedMessaging() {
+		try {
+			if (typeof embeddedservice_bootstrap === 'undefined') {
+				console.error('embeddedservice_bootstrap is not defined');
+				return;
+			}
+			
+			const countryCode = getCountryCodeFromPath();
+			const countryInfo = getCountryInfo(countryCode);
+			
+			console.log('Country Code:', countryCode);
+			console.log('Country Info:', countryInfo);
+			
+			// Set language
+			embeddedservice_bootstrap.settings.language = countryInfo.language;
+			embeddedservice_bootstrap.settings.shouldOpenLinksInSameTab = true;
+			
+			// Chat button position - use object format
+			embeddedservice_bootstrap.settings.chatButtonPosition = {
+				bottom: '30px',
+				right: '100px'
+			};
+			
+			// Initialize the embedded messaging
+			embeddedservice_bootstrap.init(
+				'00Dbl000003uCem',
+				'Leapmotor_Test',
+				'https://leapmotor.my.site.com/ESWLeapmotorTest1765461060847',
+				{
+					scrt2URL: 'https://leapmotor.my.salesforce-scrt.com'
+				}
+			);
+			
+			console.log('Embedded Messaging initialized successfully');
+			
+		} catch (err) {
+			console.error('Error loading Embedded Messaging: ', err);
+		}
+	}
+</script>
+<script type='text/javascript' src='https://leapmotor.my.site.com/ESWLeapmotorTest1765461060847/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+</body>
+</html>

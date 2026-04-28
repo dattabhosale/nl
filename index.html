@@ -670,8 +670,12 @@ function initEmbeddedMessaging() {
 </script>
 <!-- ======================== CUSTOM STYLES ======================== -->
 <style>
+/* ======================== CUSTOM STYLES ======================== */
+<style>
 :root {
-  --chat-launcher-bottom: 60px;
+  /* Increase this value to move the button up (e.g., from 60px to 90px) */
+  --chat-launcher-bottom: 90px; 
+  
   --chat-launcher-right: 30px;
   --chat-nudge-offset: 70px;
   --chat-header-height: 60px;
@@ -681,6 +685,7 @@ function initEmbeddedMessaging() {
   --chat-frame-bottom-gap: 40px;
   --chat-frame-right-gap: 30px;
 }
+
 /* ======= DESKTOP (UNCHANGED) ======= */
 @media (min-width: 1025px) {
   .embeddedMessagingFrame {

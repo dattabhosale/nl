@@ -122,7 +122,6 @@ function initEmbeddedMessaging() {
     const countryInfo = getCountryInfo(countryCode);
     embeddedservice_bootstrap.settings.shouldOpenLinksInSameTab = true;
     embeddedservice_bootstrap.settings.language = countryInfo.language;
-    embeddedservice_bootstrap.settings.chatButtonPosition = "90px,90px";
     window.addEventListener("onEmbeddedMessagingReady", function() {
       embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
         Country: countryInfo.name,
